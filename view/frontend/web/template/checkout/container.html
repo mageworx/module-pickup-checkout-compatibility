@@ -1,0 +1,45 @@
+<!--
+/**
+ * Copyright © Mageworx All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="layout__pane" data-bind="if: isPickupSelected(), visible: isVisible">
+    <p class="heading layout__pane__heading"><!-- ko i18n: '2. Pickup location'--><!-- /ko --></p>
+    <form class="form" action="#">
+        <div class="form__field">
+            <div class="radiogroup radiogroup--size-fullwidth">
+                <div class="radio radiogroup__header radiogroup__header--side-top radiogroup__header--is-selected">
+                    <input class="radio__control radiogroup__control"
+                           type="radio"
+                           id="pickup_in_store_radio"
+                           name="pickup_in_store_radio"
+                           value="1"
+                           checked
+                    >
+                    <label class="radio__label radiogroup__label" for="pickup_in_store_radio">
+                        <div class="radio__box"></div>
+                        <div class="radiogroup__label-item">
+                            <div id="mageworx-location-checkout-chooser" class="mw-store-locator-locations"
+                                 data-bind="if: isPickupSelected(), visible: isVisible">
+                                <div data-bind="if: isLocationSelected()" class="mw-store-locator-locations">
+                                    <ul class="mw-sl__stores__list">
+                                        <li class="mw-sl__stores__list__item">
+                                            <div class="mw-sl__store__info" data-bind="html:getStoreData()"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <button class="button button--outline"
+                                        type="button"
+                                        id="showLocationButton"
+                                        data-bind="click: openModal">
+                                    <!-- ko i18n: 'Select store'--><!-- /ko -->
+                                </button>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mageworx_checkout_js_layout_end_processing">
+        <observer name="mageworx_pickup_checkout_process_billing_address_form"
+                  instance="MageWorx\PickupCheckout\Observer\ProcessBillingAddressOnPaymentMethod"
+                  shared="true"
+        />
+    </event>
+</config>

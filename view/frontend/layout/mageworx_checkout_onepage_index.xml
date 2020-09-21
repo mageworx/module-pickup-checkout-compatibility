@@ -1,0 +1,107 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="columns.top">
+            <referenceBlock name="order_tabs">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="order_tabs" xsi:type="array">
+                                <item name="children" xsi:type="array">
+                                    <!-- Overwrite in block -->
+                                    <item name="tabs" xsi:type="array">
+                                        <item name="children" xsi:type="array">
+                                            <item name="pickup" xsi:type="array">
+                                                <item name="component" xsi:type="string">MageWorx_PickupCheckout/js/view/checkout/order_tabs/tabs/pickup</item>
+                                                <item name="template" xsi:type="string">MageWorx_PickupCheckout/checkout/order_tabs/tabs/pickup</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="pickupInformation" xsi:type="array">
+                                                    <item name="component" xsi:type="string">MageWorx_PickupCheckout/js/view/checkout/pickup-information</item>
+                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="visible" xsi:type="boolean">false</item>
+                                                        <item name="namespace" xsi:type="string">pickup-form</item>
+                                                        <item name="deps" xsi:type="array">
+                                                            <item name="0" xsi:type="string">checkoutProvider</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="customer-email-pickup" xsi:type="array">
+                                                            <item name="component" xsi:type="string">MageWorx_Checkout/js/view/form/element/email</item>
+                                                            <item name="displayArea" xsi:type="string">customer-email</item>
+                                                            <item name="namespace" xsi:type="string">pickup-form</item>
+                                                        </item>
+                                                        <item name="shipping-address-fieldset" xsi:type="array">
+                                                            <item name="component" xsi:type="string">MageWorx_Checkout/js/view/shipping-address/fieldset</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="deps" xsi:type="array">
+                                                                    <item name="0" xsi:type="string">checkoutProvider</item>
+                                                                </item>
+                                                            </item>
+                                                            <item name="displayArea" xsi:type="string">additional-fieldsets</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <!-- Overwritten in the \MageWorx\Checkout\Block\Checkout\Onepage\LayoutProcessor -->
+                                                            </item>
+                                                        </item>
+                                                        <!-- TODO: Move to the layout processor in compatibility module -->
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <!-- address-list-additional-addresses -->
+                                                                <item name="mageworxpickup" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">36</item>
+                                                                    <item name="component" xsi:type="string">MageWorx_Pickup/js/checkout/container</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">MageWorx_PickupCheckout/checkout/container</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <!-- address-list-additional-addresses -->
+                                                                <item name="mageworxpickup" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="isVisible" xsi:type="boolean">false</item>
+                                                                        <item name="template" xsi:type="string">MageWorx_PickupCheckout/checkout/container</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
