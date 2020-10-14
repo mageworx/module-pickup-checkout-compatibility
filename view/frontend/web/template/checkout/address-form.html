@@ -1,0 +1,21 @@
+<!-- ko foreach: getRegion('before-fields') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+<form class="form"
+      action="#"
+      id="pickup-information-form"
+      data-bind="attr: {
+          'data-hasrequired': $t('* Required Fields'),
+          'data-form-part': namespace
+      }"
+      data-mage-init='{"validation":{}}'
+>
+    <fieldset class="fieldset address" data-form="shipping-new-address">
+
+        <!-- ko foreach: getRegion('additional-fieldsets') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+    </fieldset>
+
+</form>
