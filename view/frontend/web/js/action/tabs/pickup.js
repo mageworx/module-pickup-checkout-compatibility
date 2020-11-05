@@ -38,7 +38,8 @@ define([
             shippingMethods = registry.get('ns = checkout, name = checkout.steps.shipping-step.shippingMethods'),
             shippingAddress = registry.get('ns = checkout, name = checkout.steps.shipping-step.shippingAddress'),
             billingAddress = registry.get('ns = checkout, name = checkout.steps.shipping-step.billingAddress'),
-            pickupInfo = registry.get('ns = checkout, name = checkout.steps.shipping-step.pickupInformation');
+            pickupInfo = registry.get('ns = checkout, name = checkout.steps.shipping-step.pickupInformation'),
+            pickupContainer = registry.get('ns = checkout, name = checkout.steps.billing-step.pickup_container');
 
         if (flag === true) {
             enableTab();
@@ -59,6 +60,7 @@ define([
             billingAddress.isAddressDifferent(true);
             billingAddress.isAddressSameAsShipping(false);
             pickupInfo.visible(true);
+            pickupContainer.visible(true);
             selectPickupShippingMethod();
         }
 
@@ -73,6 +75,7 @@ define([
             shippingAddress.visible(true);
             billingAddress.visible(true);
             pickupInfo.visible(false);
+            pickupContainer.visible(false);
             deselectShippingMethod();
         }
 
