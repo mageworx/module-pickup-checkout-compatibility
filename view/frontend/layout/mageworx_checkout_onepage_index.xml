@@ -1,4 +1,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MageWorx_PickupCheckout::styles.css"/>
+    </head>
     <body>
         <referenceContainer name="columns.top">
             <referenceBlock name="order_tabs">

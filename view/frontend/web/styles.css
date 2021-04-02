@@ -1,0 +1,26 @@
+#mageworx-location-checkout-chooser .mw-sl__store__info {
+    font-weight: 400;
+}
+
+#mageworx-location-checkout-chooser .mw-sl__store__info__name {
+    font-weight: 600;
+}
+
+#mageworx-location-checkout-chooser .mw-sl__store__info__closed {
+    color: #d82626;
+}
+
+#mageworx-location-checkout-chooser .mw-sl__store__info__open {
+    color: #54B644;
+}
+
+#mageworx-location-checkout-chooser {
+    padding: 0 20px;
+}
+
+#mageworx-location-checkout-chooser #showLocationButtonNew {
+    border-color: #1f965e;
+    background-color:#ffffff;
+    color: #1f965e;
+    margin-bottom: 20px;
+}
