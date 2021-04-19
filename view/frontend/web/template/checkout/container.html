@@ -43,6 +43,12 @@
                                     <!-- ko i18n: 'Select store for Pickup'--><!-- /ko -->
                                 </button>
                             </div>
+                    <!-- Set additional data for the shipping method here (when selected) -->
+                    <div class="radiogroup__content">
+                        <div class="form form--condensed">
+                            <each args="$parent.getRegion('shipping_method_additional_data')" render=""/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

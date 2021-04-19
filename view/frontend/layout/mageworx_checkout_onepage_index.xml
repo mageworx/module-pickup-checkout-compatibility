@@ -76,6 +76,15 @@
                                                                     <item name="config" xsi:type="array">
                                                                         <item name="template" xsi:type="string">MageWorx_PickupCheckout/checkout/container</item>
                                                                     </item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="shipping_method_additional_data" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">uiCollection</item>
+                                                                            <item name="displayArea" xsi:type="string">shipping_method_additional_data</item>
+                                                                            <item name="children" xsi:type="array">
+                                                                                <!-- Child elements must be added in third-party module -->
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
                                                                 </item>
                                                             </item>
                                                         </item>
