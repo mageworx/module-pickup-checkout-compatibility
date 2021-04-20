@@ -46,8 +46,13 @@ class CheckoutLayoutModifier implements ObserverInterface
         if (isset($jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingMethods']['children']['shipping_method_additional_data']['children']['delivery_date'])) {
             $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
-            ['pickup_container']['children']['mageworxpickup']['children']['shipping_method_additional_data']['children']['delivery_date'] = $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['pickup_container']['children']['mageworxpickup']['children']['shipping_method_additional_data']['children']
+            ['delivery_date'] = $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingMethods']['children']['shipping_method_additional_data']['children']['delivery_date'];
+
+            $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
+            ['pickup_container']['children']['mageworxpickup']['children']['shipping_method_additional_data']['children']
+            ['delivery_date']['config']['isVisible'] = true;
         }
     }
 }
