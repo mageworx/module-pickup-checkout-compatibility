@@ -61,13 +61,14 @@ class AddStoreAddressToOrder extends AbstractAddDataToOrder
         AddressInterface $address,
         LocationInterface $location
     ): AddressInterface {
-        $address->setId('');
+        //$address->setId('');
         $address->setFax('');
         $address->setStreetFull('');
         $address->setCountryId($location->getCountryId());
         $address->setPostcode($location->getPostcode());
         $address->setStreet($location->getAddress());
         $address->setCity($location->getCity());
+
 
         return $address;
     }

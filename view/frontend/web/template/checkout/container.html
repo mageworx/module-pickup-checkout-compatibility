@@ -20,6 +20,13 @@
                     <label class="radio__label radiogroup__label" for="pickup_in_store_radio">
                         <div class="radio__box"></div>
                         <div class="radiogroup__label-item">
+                            <span class="text text--variation-strong" data-bind="text: amount()"></span>
+                        </div>
+                        <div class="radiogroup__label-item pickup_method_name">
+                            <span class="text" data-bind="text: carrierTitle()"></span>
+                            <span class="text text--variation-subdued" data-bind="text: methodTitle()"></span>
+                        </div>
+                    </label>
                             <div id="mageworx-location-checkout-chooser" class="mw-store-locator-locations"
                                  data-bind="if: isPickupSelected(), visible: isVisible">
                                 <div data-bind="if: isLocationSelected()" class="mw-store-locator-locations">
@@ -29,15 +36,19 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button class="button button--outline"
+                                <button class="action button button--primary"
                                         type="button"
-                                        id="showLocationButton"
+                                        id="showLocationButtonNew"
                                         data-bind="click: openModal">
-                                    <!-- ko i18n: 'Select store'--><!-- /ko -->
+                                    <!-- ko i18n: 'Select store for Pickup'--><!-- /ko -->
                                 </button>
                             </div>
+                    <!-- Set additional data for the shipping method here (when selected) -->
+                    <div class="radiogroup__content">
+                        <div class="form form--condensed">
+                            <each args="getRegion('shipping_method_additional_data')" render=""/>
                         </div>
-                    </label>
+                    </div>
                 </div>
             </div>
         </div>
