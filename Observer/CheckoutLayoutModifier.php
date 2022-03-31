@@ -16,6 +16,21 @@ use Magento\Framework\Event\ObserverInterface;
  */
 class CheckoutLayoutModifier implements ObserverInterface
 {
+
+    /**
+     * @var \Magento\Checkout\Model\Session\Proxy
+     */
+    protected $checkoutSession;
+
+    /**
+     * @param \Magento\Checkout\Model\Session\Proxy $checkoutSession
+     */
+    public function __construct(
+        \Magento\Checkout\Model\Session\Proxy $checkoutSession
+    ) {
+        $this->checkoutSession = $checkoutSession;
+    }
+
     /**
      * @inheritDoc
      */
@@ -29,6 +44,14 @@ class CheckoutLayoutModifier implements ObserverInterface
         // Copy element
         $originalElement = $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
         ['children']['pickupInformation']['children']['shippingAdditional'];
+
+        if ($this->checkoutSession->getQuote() && $this->checkoutSession->getQuote()->getIsVirtual()) {
+            // Remove pickup for virtual quote and return
+            unset($jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
+                  ['children']['pickupInformation']);
+
+            return;
+        }
 
         $originalElement['component'] = 'MageWorx_PickupCheckout/js/view/checkout/select-store-container';
         $originalElement['config']['template'] = 'MageWorx_PickupCheckout/checkout/select-store-container';
