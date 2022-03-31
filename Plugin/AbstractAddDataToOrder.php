@@ -68,9 +68,15 @@ abstract class AbstractAddDataToOrder
             return true;
         }
 
-        $methodCode = $entity->getShippingAddress()->getShippingMethod();
+        if ($entity->getIsVirtual()) {
+            return true;
+        }
 
-        if (!$methodCode) {
+        if ($entity->getShippingAddress()) {
+            $methodCode = $entity->getShippingAddress()->getShippingMethod();
+        }
+
+        if (empty($methodCode)) {
             $methodCode = $entity->getShippingMethod();
         }
 
