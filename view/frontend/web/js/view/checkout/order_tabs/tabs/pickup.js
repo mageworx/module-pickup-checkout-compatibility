@@ -26,7 +26,10 @@ define([
     return Component.extend({
         defaults: {
             visible: false,
-            previousVisibility: false
+            previousVisibility: false,
+            deps: [
+                'order_tabs'
+            ]
         },
 
         observableProperties: [
@@ -47,30 +50,19 @@ define([
             this.observe(this.observableProperties);
             this.initSubscribers();
             this.setInitialVisibility();
-            this.updateInitialVisibilityCount();
 
             return this;
         },
 
         initSubscribers: function () {
-            var tabs = registry.get('order_tabs');
-
-            this.visible.subscribe(function (oldValue) {
-                this.previousVisibility(oldValue);
-            }, this, 'beforeChange');
-
-            this.visible.subscribe(function (visibility) {
-                var oldVisibility = this.previousVisibility();
-                if (oldVisibility == false && visibility == true) {
-                    tabs.visibleTabsCount(tabs.visibleTabsCount() + 1);
-                } else if (oldVisibility == true && visibility == false) {
-                    tabs.visibleTabsCount(tabs.visibleTabsCount() - 1);
-                }
-            }, this, 'change');
+            registry.async('order_tabs')(function (tabs) {
+                this.visible.subscribe(function (oldValue) {
+                    this.previousVisibility(oldValue);
+                }, this, 'beforeChange');
+            }.bind(this));
         },
 
         process: function (flag) {
-            console.log('Processing pickup tab');
             pickupTabProcess(flag);
         },
 
@@ -88,17 +80,19 @@ define([
                     }
                 }
 
-                self.visible(visible);
-            });
-        },
+                if (!visible && this.previousVisibility()) {
+                    let parent = registry.get(this.parentName),
+                        deliveryTab = parent && parent.getChild('delivery');
 
-        updateInitialVisibilityCount: function () {
-            var visibility = this.visible();
-            registry.async('order_tabs')(function (tabs) {
-                if (visibility) {
-                    tabs.visibleTabsCount(tabs.visibleTabsCount() + 1);
+                    if (deliveryTab) {
+                        parent.selectTab(deliveryTab);
+                    } else {
+                        console.log('ERROR! Unable to locate delivery tab.');
+                    }
                 }
-            });
+
+                self.visible(visible);
+            }, this);
         }
     });
 });
