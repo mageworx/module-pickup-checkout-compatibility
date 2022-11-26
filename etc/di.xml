@@ -12,4 +12,7 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="mageworx_pickup_checkout_add_store_region" type="MageWorx\PickupCheckout\Plugin\AddStoreRegionToOrder"/>
     </type>
+    <type name="\Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="mageworx_pickup_checkout_use_store_address_in_payment" type="MageWorx\PickupCheckout\Plugin\UseStoreAddressInPayment"/>
+    </type>
 </config>
