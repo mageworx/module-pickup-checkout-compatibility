@@ -77,7 +77,6 @@ class UseStoreAddressInPayment extends AbstractAddDataToOrder
         AddressInterface $address,
         LocationInterface $location
     ): AddressInterface {
-        //$address->setId('');
         $address->setFax('');
         $address->setStreetFull('');
         $address->setPostcode($location->getPostcode());
