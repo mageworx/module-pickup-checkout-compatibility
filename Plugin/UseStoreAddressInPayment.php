@@ -80,7 +80,6 @@ class UseStoreAddressInPayment extends AbstractAddDataToOrder
         //$address->setId('');
         $address->setFax('');
         $address->setStreetFull('');
-        $address->setCountryId($location->getCountryId());
         $address->setPostcode($location->getPostcode());
         $address->setStreet($location->getAddress());
         $address->setCity($location->getCity());
