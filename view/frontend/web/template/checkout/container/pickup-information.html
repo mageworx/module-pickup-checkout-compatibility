@@ -1,15 +1,15 @@
 <div id="pickup-info" data-bind="fadeVisible: visible()">
     <p class="heading layout__pane__heading"><!-- ko i18n: '1. Personal Information'--><!-- /ko --></p>
 
-    <each args="getRegion('before-form')" render=""/>
+    <each args="getRegion('before-form')" render=""></each>
 
     <!-- Email -->
-    <each args="getRegion('customer-email')" render=""/>
+    <each args="getRegion('customer-email')" render=""></each>
 
     <!-- Inline address form -->
-    <render args="shippingFormTemplate"/>
+    <render args="shippingFormTemplate"></render>
 
     <div id="onepage-checkout-shipping-method-additional-load">
-        <each args="getRegion('shippingAdditional')" render="" />
+        <each args="getRegion('shippingAdditional')" render=""></each>
     </div>
 </div>
