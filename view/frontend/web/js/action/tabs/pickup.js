@@ -81,15 +81,17 @@ define([
 
         function selectPickupShippingMethod () {
             var rates = shippingService.getShippingRates()();
+            var selectedRate = null;
             for (var rate of rates) {
                 var carrierCode = rate.carrier_code;
                 if (carrierCode === 'mageworxpickup') {
+                    selectedRate = rate;
                     break;
                 }
             }
 
-            if (rate) {
-                registry.get('index = shippingMethods, ns = checkout').selectShippingMethod(rate);
+            if (selectedRate) {
+                registry.get('index = shippingMethods, ns = checkout').selectShippingMethod(selectedRate);
             } else {
                 console.log('Pickup shipping method not found');
             }
