@@ -6,10 +6,13 @@
 
 namespace MageWorx\PickupCheckout\Plugin;
 
-use Magento\Framework\Stdlib\CookieManagerInterface;
-use Magento\Quote\Api\Data\AddressInterface;
-use Magento\Quote\Model\Quote as QuoteEntity;
+use Magento\Checkout\Api\PaymentInformationManagementInterface;
+use Magento\Framework\App\State;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Stdlib\CookieManagerInterface;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Api\Data\AddressInterface;
+use Magento\Quote\Api\Data\PaymentInterface;
 use MageWorx\Locations\Api\Data\LocationInterface;
 use MageWorx\Locations\Api\LocationRepositoryInterface;
 
@@ -18,21 +21,12 @@ use MageWorx\Locations\Api\LocationRepositoryInterface;
  */
 class UseStoreAddressInPayment extends AbstractAddDataToOrder
 {
-    /**
-     * @var \Magento\Quote\Api\CartRepositoryInterface
-     */
-    private $quoteRepository;
+    private CartRepositoryInterface $quoteRepository;
 
-    /**
-     * @param \Magento\Quote\Api\CartRepositoryInterface $quoteRepository
-     * @param \Magento\Framework\App\State $state
-     * @param CookieManagerInterface $cookieManager
-     * @param LocationRepositoryInterface $locationRepository
-     */
     public function __construct(
-        \Magento\Quote\Api\CartRepositoryInterface $quoteRepository,
-        \Magento\Framework\App\State $state,
-        CookieManagerInterface $cookieManager,
+        CartRepositoryInterface     $quoteRepository,
+        State                       $state,
+        CookieManagerInterface      $cookieManager,
         LocationRepositoryInterface $locationRepository
     ) {
         $this->quoteRepository = $quoteRepository;
@@ -40,22 +34,21 @@ class UseStoreAddressInPayment extends AbstractAddDataToOrder
     }
 
     /**
-     * @param \Magento\Checkout\Api\PaymentInformationManagementInterface $paymentInformationManagement
+     * @param PaymentInformationManagementInterface $paymentInformationManagement
      * @param $cartId
-     * @param \Magento\Quote\Api\Data\PaymentInterface $paymentMethod
+     * @param PaymentInterface $paymentMethod
      * @param AddressInterface|null $billingAddress
      * @return array
      * @throws LocalizedException
      */
     public function beforeSavePaymentInformation(
-        \Magento\Checkout\Api\PaymentInformationManagementInterface $paymentInformationManagement,
-        $cartId,
-        \Magento\Quote\Api\Data\PaymentInterface $paymentMethod,
-        \Magento\Quote\Api\Data\AddressInterface $billingAddress = null
-
+        PaymentInformationManagementInterface $paymentInformationManagement,
+                                              $cartId,
+        PaymentInterface                      $paymentMethod,
+        ?AddressInterface                     $billingAddress = null
     ) {
         $locationId = $this->getLocationIdFromCookie('mageworx_location_id');
-        $quote = $this->quoteRepository->get($cartId);
+        $quote      = $this->quoteRepository->get($cartId);
         if ($this->out($quote) || !$locationId || $billingAddress === null) {
             return [$cartId, $paymentMethod, $billingAddress];
         }
@@ -74,7 +67,7 @@ class UseStoreAddressInPayment extends AbstractAddDataToOrder
      * @return AddressInterface
      */
     private function prepareAddress(
-        AddressInterface $address,
+        AddressInterface  $address,
         LocationInterface $location
     ): AddressInterface {
         $address->setFax('');
@@ -82,7 +75,6 @@ class UseStoreAddressInPayment extends AbstractAddDataToOrder
         $address->setPostcode($location->getPostcode());
         $address->setStreet($location->getAddress());
         $address->setCity($location->getCity());
-
 
         return $address;
     }
